@@ -1,7 +1,0 @@
-node_modules/
-dist/
-.DS_Store
-src/.DS_Store
-
-# large data files — load at runtime, don't commit
-src/data/*.json
