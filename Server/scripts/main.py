@@ -1,18 +1,11 @@
+# flask server w endpoints
 from flask import Flask, jsonify, request
 from flask_cors import CORS
 import dataHandler
+from config import DATASETS
 
 app = Flask(__name__)
 CORS(app)
-
-DATASETS = [
-    {
-        "id": "ai-subfield-100k",
-        "name": "AI Subfield 100k",
-        "rawPath": "server/data/ai_subfield_100k_all_columns.json",
-        "processedPath": "server/data/ai_subfield_100k_all_columns_processed.json",
-    },
-]
 
 @app.route("/api/data/<dataset_id>", methods=["GET"])
 def getData(dataset_id):

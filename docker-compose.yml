@@ -1,0 +1,21 @@
+services:
+  server:
+    build:
+      context: .
+      dockerfile: server/Dockerfile
+    restart: unless-stopped
+    volumes:
+      # persistent data folder (read + write: dataProcessor writes its output here)
+      - ./server/data:/app/server/data
+      # config is mounted so editing it only needs `docker compose restart server`, no rebuild
+      - ./server/scripts/config.py:/app/server/scripts/config.py:ro
+    expose:
+      - "5050"
+
+  client:
+    build: ./client
+    restart: unless-stopped
+    ports:
+      - "8080:80"
+    depends_on:
+      - server

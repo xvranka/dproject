@@ -1,0 +1,9 @@
+**/.venv
+**/source
+**/__pycache__
+**/node_modules
+server/data
+client
+.git
+.idea
+.claude

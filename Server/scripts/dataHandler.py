@@ -1,3 +1,4 @@
+# functions for data retrieval and optimisation techniques
 import json
 
 def fetchDataset(dataset):
@@ -32,3 +33,5 @@ def searchInDataset(dataset, keyword, offset=0, limit=20):
         "total": len(matches),
         "results": [{"id": e["id"], "title": e["title"], "authors": e["authors"]} for e in page],
     }
+
+# TODO: optimisation techniques and research

@@ -5,12 +5,15 @@ import Section from './Section.jsx'
 import Search from './Search.jsx'
 import Controls from './Controls.jsx'
 
-const API_URL = 'http://localhost:5050/api/data/ai-subfield-100k'
+const API_URL = '/api/data/ai-subfield-100k'
+
+// ?minimal=true -> embeddable widget view: no sidebar, no orientation guide
+const MINIMAL = new URLSearchParams(window.location.search).get('minimal') === 'true'
 
 export default function VMController() {
   const [points, setPoints] = useState(null)
   const [selectedIndex, setSelectedIndex] = useState(-1)
-  const [showGuide, setShowGuide] = useState(true)
+  const [showGuide, setShowGuide] = useState(!MINIMAL)
   const vizRef = useRef(null)
 
   useEffect(() => {
@@ -48,6 +51,7 @@ export default function VMController() {
 
   return (
     <div style={{ width: '100%', height: '100%', display: 'flex' }}>
+      {!MINIMAL && (
       <aside
         style={{
           width: '320px',
@@ -87,6 +91,7 @@ export default function VMController() {
           <Controls onResetCamera={handleResetCamera} showGuide={showGuide} onToggleGuide={setShowGuide} />
         </Section>
       </aside>
+      )}
       <div style={{ flex: 1, height: '100%' }}>
         <VizModule ref={vizRef} showGuide={showGuide} points={points} selectedIndex={selectedIndex} onPointClick={handlePointClick} />
       </div>
